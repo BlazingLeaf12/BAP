@@ -31,8 +31,9 @@ class bankAccount():
             print('Please enter a valid number.')
             self.deposit()
         else:
-            self.balance += amount
-            print('$' + str(amount) + ' has been deposited')
+            if amount > 0:
+                self.balance += amount
+                print('$' + str(amount) + ' has been deposited')
             self.options()
     
     def withdraw(self):
