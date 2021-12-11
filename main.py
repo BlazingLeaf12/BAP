@@ -25,19 +25,30 @@ class bankAccount():
             self.options()  
 
     def deposit(self):
-        amount = int(input('\nHow much would you like to deposit?: '))
-        self.balance += amount
-        print('$' + str(amount) + ' has been deposited')
-        self.options()
+        try:
+            amount = int(input('\nHow much would you like to deposit?: '))
+        except ValueError:
+            print('Please enter a valid number.')
+            self.deposit()
+        else:
+            self.balance += amount
+            print('$' + str(amount) + ' has been deposited')
+            self.options()
     
     def withdraw(self):
-        amount = int(input('\nHow much would you like to withdraw?: '))
-        if amount <= self.balance:
-            self.balance -= amount
-            print('$' + str(amount) + ' has been withdrawn')
+        try:
+            amount = int(input('\nHow much would you like to withdraw?: '))
+        except ValueError:
+            print('Please enter a valid number.')
+            self.withdraw()
         else:
-            print('You don\'t have this much money in your account!')
-        self.options()
+            if amount <= self.balance:
+                self.balance -= amount
+                print('$' + str(amount) + ' has been withdrawn')
+                self.options()
+            else:
+                print('You don\'t have this much money in your account!')
+                self.withdraw()
     
     def checkBal(self):
         print('\nYour current balance is: $' + str(self.balance))
